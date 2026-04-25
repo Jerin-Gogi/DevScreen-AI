@@ -12,9 +12,13 @@ const saveUserToDb = inngest.createFunction(
             await connectDB();
 
             const { first_name, last_name, email_addresses, image_url, id } = event.data;
-            const [email] = email_addresses;
             const name = `${first_name || ""} ${last_name || ""}`;
-            await User.create({ name: name, email: email, profileImage: image_url, clerkId: id });
+            await User.create({
+              name: name,
+              email: email_addresses[0]?.email_address,
+              profileImage: image_url,
+              clerkId: id,
+            });
             console.log("User synced sucessfully");
 
         } catch (err) {
