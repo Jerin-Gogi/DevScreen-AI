@@ -1,0 +1,46 @@
+import {Inngest} from "inngest";
+import { connectDB } from "./db.js";
+import User from "../models/User.js";
+
+export const inngest = new Inngest({id:"devscreen-ai"});
+
+const saveUserToDb = inngest.createFunction(
+    {id: "sync-user"}, {event:"clerk/user.created"},
+
+    async ({event})=>{
+        try {
+            await connectDB();
+
+            const { first_name, last_name, email_addresses, image_url, id } = event.data;
+            const [email] = email_addresses;
+            const name = `${first_name || ""} ${last_name || ""}`;
+            await User.create({ name: name, email: email, profileImage: image_url, clerkId: id });
+            console.log("User synced sucessfully");
+
+        } catch (err) {
+            console.log(err.message);
+        }
+    }    
+)
+
+
+const deleteUserFromDb = inngest.createFunction(
+  { id: "delete-user-from-db" },
+  { event: "clerk/user.deleted" },
+
+  async ({ event }) => {
+    try {
+      await connectDB();
+      
+      const {id} = event.data;
+      await User.deleteOne({clerkId: id});
+      console.log("User Deleted Sucessfully");
+
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
+);
+
+
+export const functions = [saveUserToDb,deleteUserFromDb]
