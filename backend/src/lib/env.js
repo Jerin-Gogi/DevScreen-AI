@@ -10,5 +10,6 @@ export const ENV = {
     INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY,
     STREAM_API_KEY: process.env.STREAM_API_KEY,
     CLIENT_URL: process.env.CLIENT_URL,
-    CLERK_WEBHOOK_URL: process.env.CLERK_WEBHOOK_URL
+    CLERK_WEBHOOK_URL: process.env.CLERK_WEBHOOK_URL,
+    INGEST_DEV:process.env.INNGEST_DEV
 }; 
