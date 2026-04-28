@@ -3,8 +3,8 @@ import { connectDB } from "./db.js";
 import pkg from "@stream-io/video-client";
 import { ENV } from "./env.js";
 import { upsertStreamUser, deleteStreamUser } from "./stream.js";
-const { StreamVideoClient, User: StreamUser } = pkg;
-
+import User from "../models/User.js"
+const { StreamVideoClient} = pkg;
 
 
 export const inngest = new Inngest({ id: "devscreen-ai" });
