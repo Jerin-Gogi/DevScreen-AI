@@ -19,6 +19,18 @@ app.use(cors({origin:ENV.CLIENT_URL, credentials:true}));
 app.use("/api/inngest", serve({client:inngest, functions}))
 
 //Routes
+app.post("/api/webhooks/clerk",async (req,res)=>{
+    const {type,data} = req.body;
+    
+    inngest.send({
+      name: `clerk/${type}`,
+      data: data
+    });
+
+    res.status(200).json({recieved: true})
+})
+
+
 app.get("/health", (req, res) => {
   res.status(200).json({
     message: "Server is healthy",

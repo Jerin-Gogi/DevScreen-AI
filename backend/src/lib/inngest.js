@@ -1,32 +1,32 @@
-import {Inngest} from "inngest";
+import { Inngest } from "inngest";
 import { connectDB } from "./db.js";
 import User from "../models/User.js";
 
-export const inngest = new Inngest({id:"devscreen-ai"});
+export const inngest = new Inngest({ id: "devscreen-ai" });
 
 const saveUserToDb = inngest.createFunction(
-    {id: "sync-user"}, {event:"clerk/user.created"},
+  { id: "sync-user" },
+  { event: "clerk/user.created" },
 
-    async ({event})=>{
-        try {
-            await connectDB();
+  async ({ event }) => {
+    try {
+      await connectDB();
 
-            const { first_name, last_name, email_addresses, image_url, id } = event.data;
-            const name = `${first_name || ""} ${last_name || ""}`;
-            await User.create({
-              name: name,
-              email: email_addresses[0]?.email_address,
-              profileImage: image_url,
-              clerkId: id,
-            });
-            console.log("User synced sucessfully");
-
-        } catch (err) {
-            console.log(err.message);
-        }
-    }    
-)
-
+      const { first_name, last_name, email_addresses, image_url, id } =
+        event.data;
+      const name = `${first_name || ""} ${last_name || ""}`;
+      await User.create({
+        name: name,
+        email: email_addresses[0]?.email_address,
+        profileImage: image_url,
+        clerkId: id,
+      });
+      console.log("User synced sucessfully");
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
+);
 
 const deleteUserFromDb = inngest.createFunction(
   { id: "delete-user-from-db" },
@@ -35,16 +35,14 @@ const deleteUserFromDb = inngest.createFunction(
   async ({ event }) => {
     try {
       await connectDB();
-      
-      const {id} = event.data;
-      await User.deleteOne({clerkId: id});
-      console.log("User Deleted Sucessfully");
 
+      const { id } = event.data;
+      await User.deleteOne({ clerkId: id });
+      console.log("User Deleted Sucessfully");
     } catch (err) {
       console.log(err.message);
     }
   },
 );
 
-
-export const functions = [saveUserToDb,deleteUserFromDb]
+export const functions = [saveUserToDb, deleteUserFromDb];
