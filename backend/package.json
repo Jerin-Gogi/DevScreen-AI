@@ -12,12 +12,13 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@clerk/express": "^2.1.12",
     "@stream-io/video-client": "^1.48.0",
     "cors": "^2.8.5",
     "devscreen-ai": "file:..",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "inngest": "^3.44.3",
+    "inngest": "^3.54.0",
     "mongoose": "^8.19.1",
     "stream-chat": "^9.24.0"
   },
