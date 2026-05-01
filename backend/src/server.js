@@ -7,6 +7,8 @@ import {serve} from "inngest/express";
 import {inngest,functions} from "./lib/inngest.js"
 import { clerkMiddleware } from "@clerk/express";
 import { protectRoute } from "./middleware/protectRoute.js";
+import { chatRoutes } from "./routes/chatRoutes.js";
+
 const app = express();
 const __dirname = path.resolve();
 
