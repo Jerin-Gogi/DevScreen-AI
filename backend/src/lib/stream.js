@@ -9,7 +9,7 @@ if(!apiKey || !apiSecret){
     console.log("Cannot find keys");
 }
 
-const client = StreamChat.getInstance(apiKey, apiSecret);
+export const client = StreamChat.getInstance(apiKey, apiSecret);
 
 export const upsertStreamUser = async function(userData){
     console.log(userData);
@@ -35,6 +35,6 @@ export const deleteStreamUser = async function (userId) {
   }
 };
 // generate token
-const generateToken = function(data){
-    client.createToken(data);
+export const generateToken = function(data){
+    return client.createToken(data);
 }
