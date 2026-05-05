@@ -13,6 +13,7 @@
   "type": "module",
   "dependencies": {
     "@clerk/express": "^2.1.12",
+    "@stream-io/node-sdk": "^0.7.12",
     "@stream-io/video-client": "^1.48.0",
     "cors": "^2.8.5",
     "devscreen-ai": "file:..",
