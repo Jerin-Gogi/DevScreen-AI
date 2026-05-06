@@ -1,6 +1,6 @@
 import { ENV } from "./env.js";
 import {StreamChat} from "stream-chat";
-
+import {StreamClient} from "@stream-io/node-sdk";
 const apiKey = ENV.STREAM_API_KEY;
 const apiSecret = ENV.STREAM_API_SCERET;
 
@@ -9,7 +9,10 @@ if(!apiKey || !apiSecret){
     console.log("Cannot find keys");
 }
 
-export const client = StreamChat.getInstance(apiKey, apiSecret);
+
+export const client = StreamChat.getInstance(apiKey, apiSecret); // Video
+
+export const streamClient = new StreamClient(apiKey, apiSecret); // Chat
 
 export const upsertStreamUser = async function(userData){
     console.log(userData);

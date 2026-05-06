@@ -4,7 +4,7 @@ import pkg from "@stream-io/video-client";
 import { ENV } from "./env.js";
 import { upsertStreamUser, deleteStreamUser } from "./stream.js";
 import User from "../models/User.js"
-const { StreamVideoClient} = pkg;
+
 
 
 export const inngest = new Inngest({ id: "devscreen-ai" });
@@ -35,6 +35,9 @@ const saveUserToDb = inngest.createFunction(
         image: newUser.profileImage
       });
       console.log("User synced sucessfully");
+
+      // Send Welcome Email to user. 
+
     } catch (err) {
       console.log(err.message);
     }
