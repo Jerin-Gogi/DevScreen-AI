@@ -1,6 +1,6 @@
 import { createCommandStringExtractionMiddleware } from "stream-chat";
 import { client, streamClient } from "../lib/stream.js";
-import { Session } from "../models/Session.js";
+import  Session  from "../models/Session.js";
 
 export const createSession = async function (req, res) {
   try {
@@ -154,7 +154,7 @@ export const endSession = async function (req, res) {
     const channel = await client.channel("messaging", session.callId);
     await channel.delete();
     session.status = "completed";
-    session.save();
+    await  session.save();
     res.status(200).json({ message: "Session ended sucessfully" });
   } catch (err) {
     console.log(`[Error-in-endSession-controller] ${err.message}`);
