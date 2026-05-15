@@ -1,26 +1,31 @@
+import { Navigate, Routes,Route } from "react-router";
+import HomePage from "./pages/HomePage";
+import ProblemsPage from "./pages/ProblemsPage";
+import { useUser } from "@clerk/react";
+import { Toaster } from "react-hot-toast";
 
-import { Show,SignInButton, SignOutButton, SignUpButton, UserButton } from '@clerk/react'
 
 function App() {
 
+  const {isSignedIn} = useUser();
 
   return (
     <>
-      <h1>Welcome to DevScreen AI</h1>
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route
+          path="/problems"
+          element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"} />}
+        ></Route>
+      </Routes>
 
-      <Show when={"signed-in"}>
-        <SignOutButton/>
-      </Show>
-
-      <Show when= {"signed-out"}>
-        <SignInButton>
-          <button>Login</button>
-        </SignInButton>
-        <SignUpButton/>
-      </Show>
-      <UserButton/>
+      <div><Toaster position="top-right" toastOptions={{duration:3000}}/></div>
     </>
-  )
+  );
+  
+
 }
 
 export default App;
+
+ 
