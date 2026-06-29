@@ -7,7 +7,6 @@ import { getCount, getDifficultyBadge } from '../lib/utils.js';
 function ProblemsPage() {
 
   const problems = Object.values(PROBLEMS);
-  console.log(problems);
   return (
     <>
       <Navbar />
