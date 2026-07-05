@@ -4,9 +4,14 @@ import { PROBLEMS } from '../data/problems.js'
 import { Link } from 'react-router';
 import { ArrowRightIcon, ChevronRightIcon, Code2Icon } from 'lucide-react';
 import { getCount, getDifficultyBadge } from '../lib/utils.js';
+import { useActiveSessions } from '../hooks/useSessions.js';
+
 function ProblemsPage() {
 
   const problems = Object.values(PROBLEMS);
+
+  const {data} = useActiveSessions();
+  console.log(data);
   return (
     <>
       <Navbar />

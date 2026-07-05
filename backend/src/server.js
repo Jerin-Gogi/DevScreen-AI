@@ -30,7 +30,7 @@ app.post("/api/webhooks/clerk",async (req,res)=>{
     
     inngest.send({
       name: `clerk/${type}`,
-      data: data
+      data: data 
     });
 
     res.status(200).json({recieved: true})
@@ -50,11 +50,11 @@ app.get("/health", (req, res) => {
 });
 
 if (ENV.NODE_ENV == "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  // app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/{*any}", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-  });
+  // app.get("/{*any}", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  // });
 }
 
 const startServer = async function () {

@@ -16,6 +16,7 @@
     "@tanstack/react-query": "^5.100.10",
     "axios": "^1.16.1",
     "canvas-confetti": "^1.9.3",
+    "date-fns": "^4.4.0",
     "devscreen-ai": "file:..",
     "lucide-react": "^1.16.0",
     "react": "^19.1.1",
