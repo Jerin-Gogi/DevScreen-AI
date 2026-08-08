@@ -17,7 +17,8 @@ function App() {
         <Route path="/" element={!isSignedIn ? <HomePage /> : <Navigate to={"/dashboard"} />} ></Route>
         <Route path = "/dashboard" element={isSignedIn?<DashboardPage/>: <Navigate to={"/"} />}></Route>
         <Route path="/problems" element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"} />}></Route>
-        <Route path="/problem/:id" element={<ProblemPage />}></Route>
+        <Route path="/problem/:id" element={isSignedIn?<ProblemPage />: <Navigate to = {"/"}/>}></Route>
+        <Route path="/problem/:id" element={isSignedIn?<SessionPage />: <Navigate to = {"/"}/>}></Route>
       </Routes>
 
       <div><Toaster position="top-right" toastOptions={{duration:3000}}/></div>
