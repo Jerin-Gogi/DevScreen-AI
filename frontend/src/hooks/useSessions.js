@@ -11,7 +11,6 @@ export const useActiveSessions = function () {
 };
 
 export const useCreateSessions = function () {
-
   const res = useMutation({
     mutationKey: ["createSessions"],
     mutationFn: (data) => sessionApi.createSession(data),
@@ -38,10 +37,10 @@ export const useSessionById = function (id) {
   });
   return res;
 };
-export const useJoinSession = function (id) {
+export const useJoinSession = function () {
   const res = useMutation({
     mutationKey: ["joinSession"],
-    mutationFn: () => sessionApi.joinSession(id),
+    mutationFn: () => sessionApi.joinSession,
     onSuccess: () => toast.success("Joined Session sucessfully"),
     onError: (error) => toast.error(error.response.data.message),
   });
@@ -49,10 +48,10 @@ export const useJoinSession = function (id) {
   return res;
 };
 
-export const useEndSession = function (id) {
+export const useEndSession = function () {
   const res = useMutation({
     mutationKey: ["endSession"],
-    mutationFn: () => sessionApi.endSession(id),
+    mutationFn: () => sessionApi.endSession,
     onSuccess: () => toast.success("Session ended sucessfully"),
     onError: (error) => toast.error(error.response.data.message),
   });
